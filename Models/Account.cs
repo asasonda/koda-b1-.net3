@@ -46,7 +46,7 @@ public class Account
 
     public virtual string GetInformationAccounts()
     {
-        return $"Type: {Tipe}\nAccount Number: {AccountNumber}\nName: {OwnerName}\nBalance: {Balance}\nStatus: {IsActive}\n";
+        return $"Type: {Tipe}\nAccount Number: {AccountNumber}\nName: {OwnerName}\nBalance: {Balance}\nStatus: {Status}\n";
     }
 
     public virtual void TransferReceiver(decimal jumlahTf)
