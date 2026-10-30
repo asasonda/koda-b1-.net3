@@ -1,27 +1,32 @@
 ﻿
 using Banking.Console.Models;
+using Banking.Console.services;
 
-
-Account accounts1 = new CurrentAccount("ACC001", "Andi", 5000000);
-Account accounts2 = new SavingAccount("ACC002", "Budi", 3000000, 1000000);
-
-
-Console.WriteLine("=============================");
-Console.WriteLine("Koda Banking App");
-Console.WriteLine("=============================");
 
 List<Account> accounts = new List<Account>()
 {
-    accounts1, accounts2
+    new Account("ACC001", "Andi", 500_000, "Saving", true),
+    new Account("ACC002", "Budi", 750_000, "Current", true),
+    new Account("ACC003", "Dina", 250_000, "Saving", false),
+    new Account("ACC004", "Satrion", 1_000_000, "Current", true),
 };
 
-foreach(Account account in accounts)
+foreach (Account account in accounts)
 {
     System.Console.WriteLine(account.GetInformationAccounts());
 }
 
-accounts1.SendTf(1000000);
-System.Console.WriteLine($"Andi: "+ accounts1.GetTfBalance());
+System.Console.WriteLine("=========== ASYNC ACCOUNT SEARCH =============");
+
+var queryService = new AccountQueryService(accounts);
+Task<Account?> task1 = queryService.findAccountAsync("Andi");
+Task<Account?> task2 = queryService.findAccountAsync("Rizal");
 
 
-Console.WriteLine("===============================");
+Account?[] results = await Task.WhenAll(task1, task2);
+
+foreach (Account? account in results)
+{
+    System.Console.WriteLine(account?.GetInformationAccounts() ?? "Account not found");
+}
+System.Console.WriteLine();

@@ -2,11 +2,16 @@ namespace Banking.Console.Models;
 
 public class Account
 {
-    private string AccountNumber {get; set;}
-    private string OwnerName {get; set;}
-    private decimal Balance {get; set;}
+    public string AccountNumber {get; set;}
+    public string OwnerName {get; set;}
+    public decimal Balance {get; set;}
 
-    public Account(string accountNumber, string ownerName, decimal balance)
+    public string Tipe {get; set;}
+    public bool IsActive {get; set;}
+    public string Status => IsActive ? "Active" : "Frozen";
+
+
+    public Account(string accountNumber, string ownerName, decimal balance, string tipe, bool isActive = true)
     {
         if(accountNumber == null)
         {
@@ -22,10 +27,16 @@ public class Account
         {
             throw new ArgumentException("Balance negative number");
         }
+        if(tipe == null)
+        {
+            throw new ArgumentException("type tidak valid");
+        }
 
         AccountNumber = accountNumber;
         OwnerName = ownerName;
         Balance = balance;
+        IsActive = isActive;
+        Tipe = tipe;
     }
 
     public virtual decimal GetTfBalance()
@@ -35,7 +46,7 @@ public class Account
 
     public virtual string GetInformationAccounts()
     {
-        return $"Account Number: {AccountNumber}\nName: {OwnerName}\nBalance: {Balance}\n";
+        return $"Type: {Tipe}\nAccount Number: {AccountNumber}\nName: {OwnerName}\nBalance: {Balance}\nStatus: {IsActive}\n";
     }
 
     public virtual void TransferReceiver(decimal jumlahTf)

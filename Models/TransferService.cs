@@ -9,10 +9,6 @@ public class TransferService
         Accounts = accounts;
     }
 
-    public void show()
-    {
-        System.Console.WriteLine(Accounts.GetInformationAccounts());
-    }
 
 
 }
