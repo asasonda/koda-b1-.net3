@@ -19,8 +19,8 @@ foreach (Account account in accounts)
 System.Console.WriteLine("=========== ASYNC ACCOUNT SEARCH =============");
 
 var queryService = new AccountQueryService(accounts);
-Task<Account?> task1 = queryService.findAccountAsync("Andi");
-Task<Account?> task2 = queryService.findAccountAsync("Rizal");
+Task<Account?> task1 = queryService.findAccountAsync("ACC001");
+Task<Account?> task2 = queryService.findAccountAsync("ACC006");
 
 
 Account?[] results = await Task.WhenAll(task1, task2);

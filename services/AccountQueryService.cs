@@ -11,12 +11,12 @@ public class AccountQueryService
         _accounts = accounts;
     }
 
-    public async Task<Account?> findAccountAsync(string ownerName)
+    public async Task<Account?> findAccountAsync(string accountNumber)
     {
         await Task.Delay(2000);
 
         return _accounts.FirstOrDefault(
-            account => account.OwnerName == ownerName
+            account => account.AccountNumber == accountNumber
         );
     }
 }
